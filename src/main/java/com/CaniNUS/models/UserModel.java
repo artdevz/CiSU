@@ -60,6 +60,9 @@ public class UserModel implements UserDetails {
     @Column(name = "role")
     private ERole userRole;
 
+    @Column(name = "score")
+    private float score; // Transformar depois para + notas
+
     // cpf
     // birthday
 
@@ -68,11 +71,12 @@ public class UserModel implements UserDetails {
     public UserModel() {};
 
     // SignUp:
-    public UserModel(String name, String email, String password, ERole role) {
+    public UserModel(String name, String email, String password, ERole role, float score) {
         this.userName = name;
         this.userEmail = email;
         this.userPassword = password;
         this.userRole = role;
+        this.score = score;
     }
 
     // public UserModel(UserRequestDTO data) {

@@ -33,7 +33,7 @@ public class UserController {
         if (this.ur.findByUserEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        UserModel newUser = new UserModel(data.name(), data.email(), encryptedPassword, data.role());
+        UserModel newUser = new UserModel(data.name(), data.email(), encryptedPassword, data.role(), data.score());
 
         this.ur.save(newUser);
 
