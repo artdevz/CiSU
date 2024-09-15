@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>CaniNUS</artifactId>
+	<artifactId>CiSU</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CaniNUS</name>
+	<name>CiSU</name>
 	<description>Clone do SiSU</description>
 	<url/>
 	<licenses>
