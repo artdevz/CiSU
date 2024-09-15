@@ -1,13 +1,13 @@
-package com.CaniNUS;
+package com.CiSU;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CaniNusApplication {
+public class CiSUApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CaniNusApplication.class, args);
+		SpringApplication.run(CiSUApplication.class, args);
 	}
 
 }

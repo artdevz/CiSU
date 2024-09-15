@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>CaniNUS</artifactId>
+	<artifactId>CiSU</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CaniNUS</name>
+	<name>CiSU</name>
 	<description>Clone do SiSU</description>
 	<url/>
 	<licenses>
@@ -67,18 +67,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-			<version>3.3.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
