@@ -29,6 +29,12 @@ public class CourseModel implements Serializable {
     @Column(name = "university_id")
     private UUID courseUniversity;
 
+    @Column(name = "university_name")
+    private String courseUniversityName;
+
+    @Column(name = "university_city")
+    private String courseUniversityCity;    
+
     @Column(name = "name")
     private String courseName; // ADM, Economy, Engineering, Medicine, Pedagogue ,Psychology , TI; Aceito Sugestões :)
     

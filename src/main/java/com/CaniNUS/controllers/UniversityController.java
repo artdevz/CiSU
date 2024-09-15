@@ -4,17 +4,19 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.CaniNUS.dto.UniversityDTO;
-import com.CaniNUS.dto.UniversityResponseDTO;
+import com.CaniNUS.dto.universities.UniversityDTO;
+import com.CaniNUS.dto.universities.UniversityResponseDTO;
 import com.CaniNUS.models.UniversityModel;
 import com.CaniNUS.repositories.UniversityRepository;
 
 import jakarta.validation.Valid;
 
 @SuppressWarnings("rawtypes")
+@Controller
 public class UniversityController {
     
     @Autowired
@@ -27,7 +29,7 @@ public class UniversityController {
 
         if (this.ur.findByUniversityName(data.name()) != null) return ResponseEntity.badRequest().build();
 
-        UniversityModel newUniversity = new UniversityModel(data.name());
+        UniversityModel newUniversity = new UniversityModel(data.name(), data.city());
 
         this.ur.save(newUniversity);
 

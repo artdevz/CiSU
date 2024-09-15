@@ -1,3 +1,3 @@
-package com.CaniNUS.dto;
+package com.CaniNUS.dto.users;
 
 public record LoginResponseDTO(String token) {}

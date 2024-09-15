@@ -1,4 +1,4 @@
-package com.CaniNUS.dto;
+package com.CaniNUS.dto.users;
 
 import java.util.UUID;
 

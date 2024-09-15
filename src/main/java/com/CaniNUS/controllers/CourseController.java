@@ -8,10 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.CaniNUS.dto.CourseDTO;
-import com.CaniNUS.dto.CourseResponseDTO;
+import com.CaniNUS.dto.courses.CourseDTO;
+import com.CaniNUS.dto.courses.CourseFilterDTO;
 import com.CaniNUS.models.CourseModel;
 import com.CaniNUS.repositories.CourseRepository;
+import com.CaniNUS.repositories.UniversityRepository;
 
 import jakarta.validation.Valid;
 
@@ -22,15 +23,21 @@ public class CourseController {
     @Autowired
     CourseRepository cr;
 
+    @Autowired
+    UniversityRepository ur;
+
     // CRUD:
 
     @PostMapping("/course/create")
     public ResponseEntity createNewCourse(@RequestBody @Valid CourseDTO data) {
 
-        if (this.cr.findByCourseName(data.name()) != null) return ResponseEntity.badRequest().build();
+        if (this.cr.findByIdAndName(data.universityId(), data.name()) != null) return ResponseEntity.badRequest().build();
 
         CourseModel newCourse = new CourseModel(data.universityId(), data.name(), data.numOfPlaces(), data.duration());
 
+        newCourse.setCourseUniversityName(ur.findNameById(data.universityId()));
+        newCourse.setCourseUniversityCity(ur.findCityById(data.universityId()));
+        
         this.cr.save(newCourse);
 
         return ResponseEntity.ok().build();
@@ -38,9 +45,9 @@ public class CourseController {
     }
 
     @PostMapping("/course/read")
-    public ResponseEntity readAllCourses() {
+    public ResponseEntity readAllCourses(@RequestBody @Valid CourseFilterDTO data) {
 
-        List<CourseResponseDTO> courseList = this.cr.findAll().stream().map(CourseResponseDTO::new).toList();
+        List<CourseFilterDTO> courseList = this.cr.findAllCourses(data.uniName(), data.uniCity(), data.name()).stream().map(CourseFilterDTO::new).toList();
 
         return ResponseEntity.ok(courseList);
 

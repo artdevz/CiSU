@@ -1,8 +1,7 @@
 package com.CaniNUS.models;
 
 import java.io.Serializable;
-
-import org.hibernate.validator.constraints.UUID;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,12 +29,16 @@ public class UniversityModel implements Serializable {
     @Column(name = "name")
     private String universityName;
 
+    @Column(name = "city")
+    private String universityCity;
+
     // Constructors:
 
     public UniversityModel() {}
 
-    public UniversityModel(String name) {
+    public UniversityModel(String name, String city) {
         this.universityName = name;
+        this.universityCity = city;
     }
 
 }

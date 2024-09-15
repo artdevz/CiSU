@@ -10,9 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.CaniNUS.dto.LoginDTO;
-import com.CaniNUS.dto.LoginResponseDTO;
-import com.CaniNUS.dto.RegisterDTO;
+import com.CaniNUS.dto.users.LoginDTO;
+import com.CaniNUS.dto.users.LoginResponseDTO;
+import com.CaniNUS.dto.users.RegisterDTO;
 import com.CaniNUS.models.UserModel;
 import com.CaniNUS.repositories.UserRepository;
 import com.CaniNUS.services.TokenService;

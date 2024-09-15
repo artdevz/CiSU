@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.CaniNUS.dto.RegisterDTO;
-import com.CaniNUS.dto.UserRequestDTO;
-import com.CaniNUS.dto.UserResponseDTO;
+import com.CaniNUS.dto.users.RegisterDTO;
+import com.CaniNUS.dto.users.UserRequestDTO;
+import com.CaniNUS.dto.users.UserResponseDTO;
 import com.CaniNUS.models.UserModel;
 import com.CaniNUS.repositories.UserRepository;
 
