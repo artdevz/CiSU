@@ -29,21 +29,20 @@ public class VacancyModel implements Serializable {
     @Column(name = "course_id")
     private UUID vacancyCourse;
 
-    @Column(name = "candidates_id")
-    private UUID vacancyList;
-
     @Column(name = "user_id")
     private UUID vacancyUser;
+
+    @Column(name = "vacancy_score")
+    private float vacancyScore;
 
     // Constructors:
 
     public VacancyModel() {}
-
-    // public VacancyModel(UUID courseId, UUID candidatesId, UUID userId) {
-    public VacancyModel(UUID courseId, UUID userId) {
-        this.vacancyCourse = courseId;
-        // this.vacancyList = candidatesId;
+    
+    public VacancyModel(UUID courseId, UUID userId, float score) {
+        this.vacancyCourse = courseId;        
         this.vacancyUser = userId;
+        this.vacancyScore = score;
     }
 
 }
