@@ -15,6 +15,7 @@ import com.CiSU.dto.users.RegisterDTO;
 import com.CiSU.models.UserModel;
 import com.CiSU.repositories.UserRepository;
 import com.CiSU.services.TokenService;
+import com.CiSU.services.UserService;
 
 import jakarta.validation.Valid;
 
@@ -30,6 +31,9 @@ public class AuthController {
 
     @Autowired
     private TokenService ts;
+
+    @Autowired
+    private UserService us;
     
     @PostMapping("/signup")
     public ResponseEntity signUpAccount(@RequestBody @Valid RegisterDTO data) {
@@ -37,7 +41,7 @@ public class AuthController {
         if (this.ur.findByUserEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        UserModel newUser = new UserModel(data.name(), data.email(), encryptedPassword, data.role(), data.score());
+        UserModel newUser = new UserModel(data.name(), data.email(), encryptedPassword, data.role(), us.randomizeScore());
 
         this.ur.save(newUser);
 

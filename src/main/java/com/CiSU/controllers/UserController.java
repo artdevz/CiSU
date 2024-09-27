@@ -15,6 +15,7 @@ import com.CiSU.dto.users.UserRequestDTO;
 import com.CiSU.dto.users.UserResponseDTO;
 import com.CiSU.models.UserModel;
 import com.CiSU.repositories.UserRepository;
+import com.CiSU.services.UserService;
 
 import jakarta.validation.Valid;
 
@@ -25,6 +26,9 @@ public class UserController {
     @Autowired
     UserRepository ur;
 
+    @Autowired
+    UserService us;
+
     // CRUD:
 
     @PostMapping("/user/create")
@@ -33,7 +37,7 @@ public class UserController {
         if (this.ur.findByUserEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        UserModel newUser = new UserModel(data.name(), data.email(), encryptedPassword, data.role(), data.score());
+        UserModel newUser = new UserModel(data.name(), data.email(), encryptedPassword, data.role(), us.randomizeScore());
 
         this.ur.save(newUser);
 

@@ -12,6 +12,7 @@ import com.CiSU.dto.vacancies.VacancyDTO;
 import com.CiSU.dto.vacancies.VacancyFilterDTO;
 import com.CiSU.models.VacancyModel;
 import com.CiSU.repositories.CourseRepository;
+import com.CiSU.repositories.UserRepository;
 import com.CiSU.repositories.VacancyRepository;
 
 import jakarta.validation.Valid;
@@ -26,13 +27,15 @@ public class VacancyController {
     @Autowired
     CourseRepository cr;
 
+    @Autowired
+    UserRepository ur;
+
     // CRUD:
 
     @PostMapping("/vacancy/create")
-    public ResponseEntity createNewVacancy(@RequestBody @Valid VacancyDTO data) {
+    public ResponseEntity createNewVacancy(@RequestBody @Valid VacancyDTO data) {        
         
-        // VacancyModel vacancy = new VacancyModel(data.courseId(), data.candidatesId(), data.userId());
-        VacancyModel vacancy = new VacancyModel(data.courseId(), data.userId(), data.score());
+        VacancyModel vacancy = new VacancyModel(data.courseId(), data.userId(), ur.findScoreById(data.userId()));
 
         this.vr.save(vacancy);
 
