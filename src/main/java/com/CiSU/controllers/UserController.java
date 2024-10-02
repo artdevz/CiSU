@@ -1,26 +1,34 @@
 package com.CiSU.controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.CiSU.dto.users.RegisterDTO;
-import com.CiSU.dto.users.UserRequestDTO;
-import com.CiSU.dto.users.UserResponseDTO;
+// import com.CiSU.dto.users.UserRequestDTO;
+// import com.CiSU.dto.users.UserResponseDTO;
 import com.CiSU.models.UserModel;
 import com.CiSU.repositories.UserRepository;
 import com.CiSU.services.UserService;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 
-@SuppressWarnings("rawtypes")
-@Controller
+@CrossOrigin("*")
+@RequestMapping("/api/user")
+@RestController
 public class UserController {
     
     @Autowired
@@ -31,8 +39,8 @@ public class UserController {
 
     // CRUD:
 
-    @PostMapping("/user/create")
-    public ResponseEntity createNewUser(@RequestBody @Valid RegisterDTO data) {
+    @PostMapping("/create")
+    public ResponseEntity<Nullable> createNewUser(@RequestBody @Valid RegisterDTO data) {
 
         if (this.ur.findByUserEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
@@ -41,31 +49,32 @@ public class UserController {
 
         this.ur.save(newUser);
 
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
-    @PostMapping("/user/read")
-    public ResponseEntity readAllUsers() {
+    @GetMapping("/read")
+    public ResponseEntity<List<UserModel>> readAllUsers() {
 
-        List<UserResponseDTO> userList = this.ur.findAll().stream().map(UserResponseDTO::new).toList();
+        //List<UserResponseDTO> userList = this.ur.findAll().stream().map(UserResponseDTO::new).toList();
+        List<UserModel> userList = this.ur.findAll();
 
-        return ResponseEntity.ok(userList);
+        return new ResponseEntity<>(userList, HttpStatus.OK);
 
     }
 
-    // @PostMapping("/user/update")
+    // @PostMapping("/update")
     // public ResponseEntity updateUser(@RequestBody @Valid UserDTO data) {
     //     return ResponseEntity.ok.build();
     // }
 
     // Skill Issue :(
-    @DeleteMapping("/user/delete")
-    public ResponseEntity deleteUser(@RequestBody @Valid UserRequestDTO data) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Nullable> deleteUser(@PathVariable UUID id) {
 
-        ur.deleteById(data.id());
+        ur.deleteById(id);
 
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<Nullable>(HttpStatus.OK);
 
     }
 
